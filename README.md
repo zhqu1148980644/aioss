@@ -18,8 +18,9 @@ using [uvloop](https://github.com/MagicStack/uvloop) in server
 
 ## Usage:
 Not fully completed.If you insist on,use the command:
+### server
 	cd test
 	python test_server.py -c server_config_normal.json
-
+### client
 	cd test
 	python test_client.py -c client_config_normal.json
