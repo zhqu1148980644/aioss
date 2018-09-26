@@ -3,7 +3,8 @@ ss proxy forked from [shadowsocks](https://github.com/shadowsocks/shadowsocks/tr
 Rewrited using asyncio library(python 3.5+)
 
 ## Requirements:
-python(3.5+),uvloop(only in server)
+- python(3.5+)
+- uvloop(only in server)
 ## Features:
 ### Extensible:
 Inbound and outbound protocol wre abstracted from SOCKS5,HTTP(obfs)  in ss
