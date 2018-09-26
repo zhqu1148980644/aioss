@@ -1,0 +1,29 @@
+{
+    "timeout":60,
+    "worker":1,
+    "pid_file":"/store/fds",
+    "log_file":"/store/asd",
+    "default_password":"",
+    "default_method":"aes-256-cfb",
+    "default_protocol":"http_simple",
+    "default_protocol_param":"",
+    "default_fast_open":false,
+    "users":{
+        "user1":{
+            "port":6665,
+            "password":"qwert",
+            "method":"aes-256-cfb",
+            "protocol":"http_simple",
+            "protocol_params":"",
+            "fast_open":false
+        },
+        "user2":{
+            "port":7777,
+            "password":"qwert",
+            "method":"chacha20",
+            "protocol":"http_simple",
+            "protocol_params":"",
+            "fast_open":false
+        }
+    }
+}

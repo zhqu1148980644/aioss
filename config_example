@@ -1,0 +1,58 @@
+#server
+{
+    "timeout":60,
+    "worker":1,
+    "pid_file":"~/a.log",
+    "log_file":"~/b.log",
+    "default_password":"",
+    "default_method":"aes-256-cfb",
+    "default_protocol":"http_simple",
+    "default_protocol_param":false,
+    "default_fast_open":false,
+    "users":{
+        "user1":{
+            "port":8056,
+            "password":"asd",
+            "method":"aes-128-cfb",
+            "protocol":"http_simple",
+            "protocol_params":"",
+            "fast_open":true
+        },
+        "user2":{
+            "password":"asdf",
+            "port":8055
+        }
+    }
+}
+#client
+{
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "server_address":"www.baidu.com",
+    "port":7564,
+    "password":"asdad",
+    "method":"aes-256-cfb",
+    "protocol":"http_simple",
+    "protocol_obfs":"",
+    "fast_open":false
+}
+#database
+{
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "ss",
+    "password": "pass",
+    "db": "sspanel",
+    "node_id": 0,
+    "transfer_mul": 1.0
+}
+
+注意：
+config文件中每个大括号内部最后一项末尾不要加逗号(,)，不然识别不了
+key 必须加双引号("")
+value 允许的值为:
+    "string"    字符串加双引号
+    56      数字
+    true    无需加双引号
+    false   无需加双引号
+    ""      用"" 表示值为空，空项也可以不写，会使用默认值

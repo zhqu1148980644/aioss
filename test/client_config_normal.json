@@ -1,0 +1,11 @@
+{
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "server_address":"127.0.0.1",
+    "port":6665,
+    "password":"qwert",
+    "method":"aes-256-cfb",
+    "protocol":"http_simple",
+    "protocol_obfs":"",
+    "fast_open":false
+}
