@@ -1,5 +1,5 @@
 # aioss
-ss proxy forked from [shadowsocks] [https://github.com/shadowsocks/shadowsocks/tree/master]
+ss proxy forked from [shadowsocks](https://github.com/shadowsocks/shadowsocks/tree/master)
 Rewrited using asyncio library(python 3.5+)
 
 ##Requirements:
@@ -7,9 +7,9 @@ python(3.5+),uvloop(only in server)
 ## Features:
 ### Extensible:
 Inbound and outbound protocol wre abstracted from SOCKS5,HTTP(obfs)  in ss
-Inspired by [hyper-h2] [https://hyper-h2.readthedocs.io/en/stable]
+Inspired by [hyper-h2](https://hyper-h2.readthedocs.io/en/stable)
 ### Fast:
-using [uvloop] [https://github.com/MagicStack/uvloop] in server 
+using [uvloop](https://github.com/MagicStack/uvloop) in server 
 
 - TCP/UDP support
 - HTTP proxy support
