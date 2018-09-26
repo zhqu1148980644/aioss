@@ -2,7 +2,7 @@
 ss proxy forked from [shadowsocks](https://github.com/shadowsocks/shadowsocks/tree/master)
 Rewrited using asyncio library(python 3.5+)
 
-##Requirements:
+## Requirements:
 python(3.5+),uvloop(only in server)
 ## Features:
 ### Extensible:
