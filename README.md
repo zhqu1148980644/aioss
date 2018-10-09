@@ -1,4 +1,5 @@
 # aioss
+## Not completed!!!
 Ss proxy rewrited using asyncio library(python 3.5+). 
 You can find the official version in  [shadowsocks](https://github.com/shadowsocks/shadowsocks/tree/master). 
 ### Requirements
