@@ -44,8 +44,6 @@ _chr = chr
 ord = compat_ord
 chr = compat_chr
 
-
-
 logger = logging.getLogger('BaseLogger')
 logger.setLevel(level=logging.INFO)
 

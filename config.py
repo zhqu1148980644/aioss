@@ -141,7 +141,8 @@ class Config(object):
             for info in info_list:
                 user_info[info] = user_info.setdefault(info, config['default_' + info])
             user_info = self.delete_nomeaning_key(self.userinfo_check_list, dic=user_info)
-            user_info['password'] = user_info['password'].encode() if type(user_info['password']) is str else user_info['password']
+            user_info['password'] = user_info['password'].encode() if type(user_info['password']) is str else user_info[
+                'password']
 
             tmp_user_info_dict[user] = user_info
             # user_info['password'] = user_info.setdefault('password',config['default_password'])

@@ -26,26 +26,13 @@ crypto
     from shadowsocks
 
 first send message to server:
-socks5:    b'\x03\x0dwww.baidu.com\x01\xbb'          clould start with \x01 \x03  \x04
+socks5:    b'\x03\x0dwww.baidu.com\x01\xbb'         clould start with \x01 \x03  \x04
 
 http:      b'\x03\x0dwww.baidu.com\x01\xbb'         always start with \x03
     CONNECT:
     GET/POST/...:
 """
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
+
 import asyncio
 import logging
 
@@ -84,19 +71,20 @@ class TcpProtocol(asyncio.Protocol):
         # print('connection from client,port:{}'.format(self.transport.get_extra_info('peername')[1]))
         self.set_user_config()
         self.init_connect()
-        asyncio.ensure_future(self.start_send())
+        self._task = asyncio.ensure_future(self.start_send())
 
     def data_received(self, data):
         self.data_from_local(data)
 
+    def connection_lost(self, err):
+        super().connection_lost(err)
+        self.transport.close()
+        self._task.cancel()
+
     def eof_received(self):
         super().eof_received()
-
-    def connection_lost(self, err):
-        if err:
-            print(err)
-        else:
-            super().connection_lost(err)
+        self.transport.close()
+        self._task.cancel()
 
     def set_user_config(self):
         port = self.transport.get_extra_info('sockname')[1]
@@ -311,22 +299,21 @@ class SenderProtocol(asyncio.Protocol):
 
     def connection_made(self, transport):
         self.transport = transport
-        asyncio.ensure_future(self.start_send())
+        self._task = asyncio.ensure_future(self.start_send())
 
     def data_received(self, data):
-
         if not self.local_protocol.transport.is_closing():
             self.local_protocol.data_from_sender(data)
 
-    def connection_lost(self, exc):
-
-        super().connection_lost(exc)
+    def connection_lost(self, err):
+        super().connection_lost(err)
         self.transport.close()
+        self._task.cancel()
 
     def eof_received(self):
-
         super().eof_received()
         self.transport.close()
+        self._task.cancel()
 
     async def start_send(self):
         while True:
@@ -350,6 +337,14 @@ class UdpProtocol(asyncio.DatagramProtocol):
     def connection_made(self, transport):
         self.transport = transport
         self.set_user_config()
+
+    def connection_lost(self, err):
+        super().connection_lost(err)
+        self.transport.close()
+
+    def error_received(self, exc):
+        super().error_received()
+        self.transport.close()
 
     def set_user_config(self):
         port = self.transport.get_extra_info('sockname')[1]
@@ -428,14 +423,23 @@ class UdpSenderProtocol(asyncio.DatagramProtocol):
     def connection_made(self, transport):
         self.transport = transport
         self.addr = self.transport.get_extra_info('peername')
-        asyncio.ensure_future(self.start_send())
+        self._task = asyncio.ensure_future(self.start_send())
 
     def datagram_received(self, data, addr):
         self.addr = addr
         self.local_protocol.to_local(data)
 
+    def connection_lost(self, err):
+        super().connection_lost(err)
+        self.transport.close()
+        self._task.cancel()
+
+    def error_received(self, exc):
+        super().error_received()
+        self.transport.close()
+        self._task.cancel()
+
     async def start_send(self):
         while True:
             data = await self.local_protocol.to_sender_queue.get()
-
             self.transport.sendto(data, self.addr)

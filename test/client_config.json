@@ -1,14 +1,14 @@
 {
-    "local_address":"127.0.0.1",
-    "local_port":"1080",
-    "server_address":"asd",
-    "port":"1080",
-    "password":"aes-256-cfb",
-    "method":"aes-256-cfb",
-    "protocol":"http_simple",
-    "protocol_obfs":"asdadad",
-    "fast_open":false,
-    "asdada":"sada",
-    "fwgdsf":902,
-    "asdadadqr":false
+  "local_address": "127.0.0.1",
+  "local_port": "1080",
+  "server_address": "hk1-sta117.22334.pw",
+  "port": "47357",
+  "password": "UmNgAYHPjFJQajh",
+  "method": "chacha20-ietf-poly1305",
+  "protocol": "plain",
+  "protocol_obfs": "",
+  "fast_open": false,
+  "asdada": "sada",
+  "fwgdsf": 902,
+  "asdadadqr": false
 }

@@ -3,12 +3,11 @@
 
 import socket
 import struct
-import logging
 
 import cryptor
 from base import TcpProtocol, UdpProtocol
 from client import ClientUdpProtocol
-from common import to_bytes,to_str
+from common import to_bytes, to_str
 
 
 class ServerProtocol(TcpProtocol):
@@ -76,7 +75,6 @@ class ServerProtocol(TcpProtocol):
             print(e)
             print('handle addr failed,password or method is wrong!')
             return None
-        return addr
 
 
 class ServerUdpProtocol(UdpProtocol):

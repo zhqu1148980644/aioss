@@ -1,8 +1,8 @@
 # coding=utf-8
 
 import logging
-import struct
 import socket
+import struct
 
 import cryptor
 from base import TcpProtocol, UdpProtocol

@@ -15,7 +15,6 @@ from config import Config
 #     asyncio.set_event_loop(l)
 # else:
 #     import uvloop
-#
 #     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 dns = dns_cache()

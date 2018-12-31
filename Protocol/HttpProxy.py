@@ -76,7 +76,6 @@ class HttpProxy(object):
                 port = 80
             self._addr = hostname, port
             self.stage = 0
-
             return Reply(b'ADDR', False, [self._addr, data])
 
     @classmethod

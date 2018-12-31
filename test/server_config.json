@@ -1,34 +1,34 @@
 {
-    "timeout":60,
-    "worker":1,
-    "pid_file":false,
-    "log_file":"/store/asd",
-    "default_password":"",
-    "default_method":"aes-256-cfb",
-    "default_protocol":"http_simple",
-    "default_protocol_param":"",
-    "default_fast_open":false,
-    "users":{
-        "user1":{
-            "port":8056,
-            "password":"asd",
-            "method":"aes-128-cfb",
-            "protocol":"http_simple",
-            "protocol_params":"asdad",
-            "fast_open":true,
-            "fast_open":false,
-            "asdada":"sada",
-            "fwgdsf":902,
-            "asdadadqr":false
-        },
-        "user2":{
-            "password":"asdf",
-            "port":8055
-        }
+  "timeout": 60,
+  "worker": 1,
+  "pid_file": false,
+  "log_file": "/store/asd",
+  "default_password": "",
+  "default_method": "aes-256-cfb",
+  "default_protocol": "http_simple",
+  "default_protocol_param": "",
+  "default_fast_open": false,
+  "users": {
+    "user1": {
+      "port": 8056,
+      "password": "asd",
+      "method": "aes-128-cfb",
+      "protocol": "http_simple",
+      "protocol_params": "asdad",
+      "fast_open": true,
+      "fast_open": false,
+      "asdada": "sada",
+      "fwgdsf": 902,
+      "asdadadqr": false
     },
-    "method":"aes-128-cfb",
-    "protocol":"http_simple",
-    "protocol_params":"asdad",
-    "fast_open":true,
-    "fast_open":false
+    "user2": {
+      "password": "asdf",
+      "port": 8055
+    }
+  },
+  "method": "aes-128-cfb",
+  "protocol": "http_simple",
+  "protocol_params": "asdad",
+  "fast_open": true,
+  "fast_open": false
 }
