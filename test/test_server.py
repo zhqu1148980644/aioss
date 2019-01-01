@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(r'../')
 from server import ServerProtocol, ServerUdpProtocol
-from cache import dns_cache
+from cache import DnsCache
 from config import Config
 
 # in unix,test in windows
@@ -16,7 +16,7 @@ from config import Config
 # else:
 #     import uvloop
 #     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-dns = dns_cache()
+dns = DnsCache()
 loop = asyncio.get_event_loop()
 
 config_getter = Config(server=True)

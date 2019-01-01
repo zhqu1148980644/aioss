@@ -2,8 +2,9 @@
 import collections
 
 
-class dns_cache(collections.UserDict):
+class DnsCache(collections.UserDict):
     def __init__(self):
+        super().__init__(self)
         self._data = {}
 
     def __getitem__(self, item):

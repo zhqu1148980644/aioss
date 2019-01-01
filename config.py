@@ -20,9 +20,9 @@ class Config(object):
         self.userinfo_check_list = ['port', 'password', 'method', 'protocol', 'protocol_param', 'fast_open']
         self.full_config = self.get_config()
 
-    def __call__(self, peername):
+    def __call__(self, port=None):
 
-        user_config = self.create_user_config(peername)
+        user_config = self.create_user_config(port)
         if user_config is not None:
             return UserConfig(user_config, self.server)
         else:
