@@ -1,11 +1,13 @@
 # aioss
 shadowsocks using asyncio
 
+cryptor.py and module Crypto are from shadowsocks.
+
 ## A rubbish wheel,not fully completed.
 
 ## Requirement
 - python 3.5+
-- uvloop (Optional,makes asyncio faster 2-3x)
+- uvloop (Optional,makes asyncio 2-3x faster)
 - libsodium
 - openssl
 
