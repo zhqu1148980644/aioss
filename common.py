@@ -3,7 +3,7 @@ import logging
 import winreg
 from logging.handlers import RotatingFileHandler
 
-PROXY_PATH = r"Software\Microsoft\Windows\CurrentVersion\Internet Settings"
+PROXY_PATH = r"Software/Microsoft/Windows/CurrentVersion/Internet Settings"
 KEY_PROXYENABLE = "ProxyEnable"
 KEY_PROXYSERVER = "ProxyServer"
 KEY_PROXYOVERRIDE = "ProxyOverride"
