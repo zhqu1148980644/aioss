@@ -244,14 +244,14 @@ class SodiumAeadCrypto(AeadCryptoBase):
             self.decryptor = libsodium. \
                 crypto_aead_chacha20poly1305_ietf_decrypt
         elif cipher_name == 'xchacha20-ietf-poly1305':
-            if hasattr(libsodium,
-                       'crypto_aead_xchacha20poly1305_ietf_encrypt'):
-                self.encryptor = libsodium. \
-                    crypto_aead_xchacha20poly1305_ietf_encrypt
-                self.decryptor = libsodium. \
-                    crypto_aead_xchacha20poly1305_ietf_decrypt
-            else:
+            if not hasattr(
+                libsodium, 'crypto_aead_xchacha20poly1305_ietf_encrypt'
+            ):
                 raise Exception('Unsupported cipher')
+            self.encryptor = libsodium. \
+                crypto_aead_xchacha20poly1305_ietf_encrypt
+            self.decryptor = libsodium. \
+                crypto_aead_xchacha20poly1305_ietf_decrypt
         elif cipher_name == 'sodium:aes-256-gcm':
             if hasattr(libsodium, 'crypto_aead_aes256gcm_encrypt'):
                 self.encryptor = libsodium.crypto_aead_aes256gcm_encrypt

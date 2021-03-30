@@ -25,17 +25,17 @@ class Protocol(object):
         if data is None:
             print('receiving               none data')
         self.first_data = data
-        if len(self.protocols) > 1:
-            for protocol in self.protocols:
-                fit_protocol = protocol.check(data)
-                if fit_protocol:
-                    self.protocol = protocol(server=self.server)
-                    # print('set protocol ', self.protocol)
-                    return
-            if self.protocol is None:
-                print('handling data not mathch any protocol', data)
-        else:
+        if len(self.protocols) <= 1:
             raise ValueError
+
+        for protocol in self.protocols:
+            fit_protocol = protocol.check(data)
+            if fit_protocol:
+                self.protocol = protocol(server=self.server)
+                # print('set protocol ', self.protocol)
+                return
+        if self.protocol is None:
+            print('handling data not mathch any protocol', data)
 
     def handle_server_recv(self, data):
         if self.protocol is None:

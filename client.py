@@ -26,12 +26,10 @@ class ClientProtocol(TcpProtocol):
             if type(sendforward) is list:
                 addr = sendforward[0]
                 other_data = b''.join(sendforward[1:])
-                addr_data = [self.create_first_data(addr), other_data]
+                return [self.create_first_data(addr), other_data]
             else:
                 addr = sendforward
-                addr_data = self.create_first_data(addr)
-
-            return addr_data
+                return self.create_first_data(addr)
 
         if sendforward:
             return sendforward
@@ -104,9 +102,7 @@ class ClientUdpProtocol(UdpProtocol):
 
     def pre_to_local_data(self, data):
         data, key, iv = cryptor.decrypt_all(self.config.password, self.config.method, data, None)
-        response = b'\x00\x00\x00' + data
-
-        return response
+        return b'\x00\x00\x00' + data
 
     @classmethod
     def get_addr_from_data(cls, data):

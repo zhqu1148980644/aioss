@@ -50,9 +50,8 @@ def to_bytes(data):
 
 
 def to_str(s):
-    if bytes != str:
-        if type(s) == bytes:
-            return s.decode('utf-8')
+    if bytes != str and type(s) == bytes:
+        return s.decode('utf-8')
     return s
 
 

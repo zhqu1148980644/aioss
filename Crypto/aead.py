@@ -114,13 +114,11 @@ def nonce_increment(nonce, nlen):
     :return: nonce plus by 1
     """
     c = 1
-    i = 0
     # n = create_string_buffer(nlen)
-    while i < nlen:
+    for i in range(nlen):
         c += ord(nonce[i])
         nonce[i] = chr(c & 0xFF)
         c >>= 8
-        i += 1
     return  # n.raw
 
 
@@ -332,7 +330,7 @@ def test_nonce_increment():
     nonce_increment(buf, 12)
     nonce_increment(buf, 12)
     print("".join("%02x" % ord(b) for b in buf))
-    for i in range(256):
+    for _ in range(256):
         nonce_increment(buf, 12)
         print("".join("%02x" % ord(b) for b in buf))
 
