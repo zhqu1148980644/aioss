@@ -41,13 +41,11 @@ class ServerProtocol(TcpProtocol):
             addr = self.get_addr_from_first_data(addr)
             if addr is None:
                 self.transport.close()
-                return None
             else:
                 self.handle_dns(addr)
                 if other_data is not None:
                     return other_data
-                return None
-
+            return None
         if sendforward:
             return sendforward
 
@@ -69,8 +67,11 @@ class ServerProtocol(TcpProtocol):
                 print('find other data other then first addr data!')
                 print(other_data)
 
-            addr = data[2:2 + addr_len].decode(), struct.unpack('!H', data[2 + addr_len:2 + addr_len + 2])[0]
-            return addr
+            return (
+                data[2 : 2 + addr_len].decode(),
+                struct.unpack('!H', data[2 + addr_len : 2 + addr_len + 2])[0],
+            )
+
         except Exception as e:
             print(e)
             print('handle addr failed,password or method is wrong!')
@@ -97,8 +98,9 @@ class ServerUdpProtocol(UdpProtocol):
     def pre_to_local_data(self, data):
         addr = self.pack_addr(self.sender.addr[0])
         data = addr + struct.pack('!H', self.sender.addr[1]) + data
-        response = cryptor.encrypt_all(self.config.password, self.config.method, data, None)
-        return response
+        return cryptor.encrypt_all(
+            self.config.password, self.config.method, data, None
+        )
 
     @staticmethod
     def pack_addr(address):

@@ -131,9 +131,8 @@ class Socks5(object):
         finally:
             if 0 in methods:
                 return Reply(None, True, None)
-            else:
-                print('client does not support none-authorization')
-                return False
+            print('client does not support none-authorization')
+            return False
 
     def stage6_receive_requests(self, data):
         ver, cmd, rsv, atyp = struct.unpack('!BBBB', data[0:4])
@@ -181,10 +180,7 @@ class Socks5(object):
 
     @classmethod
     def check(cls, data):
-        if data[0] == 5:
-            return True
-        else:
-            return False
+        return data[0] == 5
 
     def set_server_info(self, server_info):
         self.server_info = server_info

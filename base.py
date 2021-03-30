@@ -400,18 +400,19 @@ class UdpProtocol(asyncio.DatagramProtocol):
             print(e)
 
     async def create_sender(self):
-        if not self.sender_created.is_set():
-            try:
-                tmp_addr = self.resolved_addr
-                if tmp_addr is None:
-                    self.transport.close()
-                    raise ValueError
-                _, self.sender = await self.loop.create_datagram_endpoint(lambda: UdpSenderProtocol(self, self.loop),
-                                                                          remote_addr=tmp_addr)
-                self.sender_created.set()
-            except Exception as e:
-                print('sender could not create,time out!')
-                print(e)
+        if self.sender_created.is_set():
+            return
+        try:
+            tmp_addr = self.resolved_addr
+            if tmp_addr is None:
+                self.transport.close()
+                raise ValueError
+            _, self.sender = await self.loop.create_datagram_endpoint(lambda: UdpSenderProtocol(self, self.loop),
+                                                                      remote_addr=tmp_addr)
+            self.sender_created.set()
+        except Exception as e:
+            print('sender could not create,time out!')
+            print(e)
 
 
 class UdpSenderProtocol(asyncio.DatagramProtocol):

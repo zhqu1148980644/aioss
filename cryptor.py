@@ -106,8 +106,7 @@ class Cryptor(object):
     @staticmethod
     def get_method_info(method):
         method = method.lower()
-        m = method_supported.get(method)
-        return m
+        return method_supported.get(method)
 
     def iv_len(self):
         return len(self.cipher_iv)
@@ -134,9 +133,8 @@ class Cryptor(object):
             return buf
         if self.iv_sent:
             return self.cipher.encrypt(buf)
-        else:
-            self.iv_sent = True
-            return self.cipher_iv + self.cipher.encrypt(buf)
+        self.iv_sent = True
+        return self.cipher_iv + self.cipher.encrypt(buf)
 
     def decrypt(self, buf):
         if len(buf) == 0:

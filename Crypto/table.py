@@ -151,14 +151,14 @@ def test_table_result():
     encrypt_table = b''.join(get_table(b'foobar!'))
     decrypt_table = maketrans(encrypt_table, maketrans(b'', b''))
 
-    for i in range(0, 256):
+    for i in range(256):
         assert (target1[0][i] == ord(encrypt_table[i]))
         assert (target1[1][i] == ord(decrypt_table[i]))
 
     encrypt_table = b''.join(get_table(b'barfoo!'))
     decrypt_table = maketrans(encrypt_table, maketrans(b'', b''))
 
-    for i in range(0, 256):
+    for i in range(256):
         assert (target2[0][i] == ord(encrypt_table[i]))
         assert (target2[1][i] == ord(decrypt_table[i]))
 

@@ -127,33 +127,30 @@ class http_simple(object):
 
     def stage4_recv_requests(self, data):
 
-        if b'\r\n\r\n' in data:
-            addr = self.get_data_from_http_header(data)
-
-            host = self.get_host_from_http_header(data)
-            other_data = self.get_other_data(data)
-            if host and self.server_info["protocol_param"] is not '':
-                pos = host.find(b':')
-                if pos >= 0:
-                    host = host[:pos]
-                hosts = self.server_info["protocol_param"].split(',')
-                if host not in hosts:
-                    return False
-            if len(addr) < 4:
-                return False
-            if len(addr) >= 13:
-                if other_data is not None:
-                    addr = [addr, other_data]
-                return Reply(b'ADDR', True, addr)
+        if b'\r\n\r\n' not in data:
             return False
+        addr = self.get_data_from_http_header(data)
 
+        host = self.get_host_from_http_header(data)
+        other_data = self.get_other_data(data)
+        if host and self.server_info["protocol_param"] is not '':
+            pos = host.find(b':')
+            if pos >= 0:
+                host = host[:pos]
+            hosts = self.server_info["protocol_param"].split(',')
+            if host not in hosts:
+                return False
+        if len(addr) < 4:
+            return False
+        if len(addr) >= 13:
+            if other_data is not None:
+                addr = [addr, other_data]
+            return Reply(b'ADDR', True, addr)
         return False
 
     def stage5_send_response(self, data):
         if data is not None:
             raise ValueError("server send's accepted data must be None")
-            return False
-
         now = datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT').encode()
         sendforward = b'HTTP/1.1 200 OK\r\n' \
                       b'Connection: keep-alive\r\n' \
@@ -170,19 +167,17 @@ class http_simple(object):
 
     def encode_head(self, data):
         hexstr = binascii.hexlify(data)
-        chs = []
-        for i in range(0, len(hexstr), 2):
-            chs.append(b'%' + hexstr[i:i + 2])
+        chs = [b'%' + hexstr[i:i + 2] for i in range(0, len(hexstr), 2)]
         return b''.join(chs)
 
     # b'%61%62%63%64%65%65%66'
     # b'abcdeef'
     def get_data_from_http_header(self, data):
 
-        ret_buf = b''
         lines = data.split(b'\r\n')
         if lines and len(lines) > 1:
             hex_items = lines[0][5:].split(b' ')[0].split(b'%')
+            ret_buf = b''
             if hex_items and len(hex_items) > 1:
                 for index in range(1, len(hex_items)):
                     if len(hex_items[index]) < 2:

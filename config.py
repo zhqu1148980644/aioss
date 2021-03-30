@@ -149,8 +149,7 @@ class Config(object):
         return tmp_user_info_dict
 
     def delete_empty(self, dic):
-        tmp = {key: value for key, value in dic.items() if value != ''}
-        return tmp
+        return {key: value for key, value in dic.items() if value != ''}
 
     def delete_nomeaning_key(self, *args, dic):
         def convene(*args):
@@ -168,19 +167,20 @@ class Config(object):
         return True
 
     def create_user_config(self, port):
-        if self.server:
-            for user, user_info in self.full_config['users'].items():
-                if user_info['port'] == int(port):
-                    user_config = {}
-                    user_config['timeout'] = self.full_config['timeout']
-                    user_config['worker'] = self.full_config['worker']
-                    user_config['pid_file'] = self.full_config['pid_file']
-                    user_config['log_file'] = self.full_config['log_file']
-                    user_config.update(user_info)
-                    return user_config
-            return None
-        else:
+        if not self.server:
             return self.full_config
+        for user, user_info in self.full_config['users'].items():
+            if user_info['port'] == int(port):
+                user_config = {
+                    'timeout': self.full_config['timeout'],
+                    'worker': self.full_config['worker'],
+                    'pid_file': self.full_config['pid_file'],
+                    'log_file': self.full_config['log_file'],
+                }
+
+                user_config.update(user_info)
+                return user_config
+        return None
 
 
 class UserConfig(object):
